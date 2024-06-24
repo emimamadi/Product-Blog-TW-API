@@ -6,7 +6,11 @@ import ReactSlider from "react-slider";
 
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 
-import { searchProduct, priceProduct ,categoryProduct } from "@/redux/productSlice";
+import {
+  searchProduct,
+  priceProduct,
+  categoryProduct,
+} from "@/redux/productSlice";
 
 import "./style.scss";
 
@@ -17,7 +21,16 @@ const MAX = 2000;
 export default function SearchFilter() {
   const [values, setValues] = useState([MIN, MAX]);
 
-  const category=["smartphones","laptops","fragrances","skincare"]
+  // const [categories, setCategories] = useState([x, y]);
+
+  const category = [
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing",
+  ];
+
+  // const category=["smartphones","laptops","fragrances","skincare"]
 
   // const handleChange = (values: any) => setValues(values);
 
@@ -26,19 +39,21 @@ export default function SearchFilter() {
     dispatch(priceProduct(values));
   };
 
+  // const handleCategory = () => {
+
+  // };
+
   // console.log(values);
 
-   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <ul className="flex flex-col gap-2 min-w-[300px] min-h-screen mt-5 rounded shadow-2xl border border-gray-200 pt-10 outline-none">
-   
-
       <input
         type="search"
         name="search"
         id=""
-        className="focus:outline-1 w-30 mx-auto rounded-full"
+        className="focus:outline-1 w-30 mx-auto rounded-full px-5 py-2"
         placeholder="Search"
         // onChange={handleSearch}
         onChange={(e: any) => {
@@ -84,26 +99,29 @@ export default function SearchFilter() {
 
           <article className="px-4 pb-4">
             <ul className="flex flex-col gap-1 pl-2">
+              {category.map((item, index) => (
+                <li key={index}>
+                  <input
+                    id={item}
+                    type="checkbox"
+                    value={item}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    onChange={(e: any) =>
+                      dispatch(
+                        categoryProduct([e.target.checked, e.target.value])
+                      )
+                    }
 
-          {
-            category.map((item,index)=>(
-              <li key={index}>
-              <input
-                id={item}
-                type="checkbox"
-                value={item}
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                onChange={(e:any)=>dispatch(categoryProduct(e.target.value))}
-             />
-              <label
-                htmlFor={item}
-                className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-               {item}
-              </label>
-            </li>
-            ))
-          }
+                    // onChange={handleCategory}
+                  />
+                  <label
+                    htmlFor={item}
+                    className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    {item}
+                  </label>
+                </li>
+              ))}
 
               {/* <li>
                 <input

@@ -7,9 +7,9 @@ import Accordian from "@/components/accordian";
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <Carousel/>
+      <Carousel />
 
-      <div className=" flex">
+      <div className=" flex gap-5 mx-5">
 
       <Accordian />
       <Accordian />

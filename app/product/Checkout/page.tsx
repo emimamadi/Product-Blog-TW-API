@@ -45,7 +45,7 @@ export default function page() {
     // <>Hello</>
     <div className="flex flex-col">
       <Link
-        href="/pr"
+        href="/product"
         className="btn w-28 h-8 bg-yellow-300 border-yellow-300 rounded-lg my-5  ml-8 text-center shadow-2xl shadow-yellow-300"
       >
         Back

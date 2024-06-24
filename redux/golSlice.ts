@@ -1,27 +1,66 @@
-import {
-  createSlice,
-  createAction,
-  configureStore,
-  createAsyncThunk,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { enableMapSet } from "immer";
-
-// import { products } from "@/data/data"
+// var cors = require('cors')
 
 export const FetchProduct = createAsyncThunk<
   string[],
   void,
   { rejectValue: string }
->("product/FetchProduct", async (_, thunkAPI) => {
-  const response = await fetch("https://fakestoreapi.com/products", {
-    method: "GET",
-  });
+>("gol/FetchProduct", async (_, thunkAPI) => {
+    const response = await fetch("https://fakestoreapi.com/products",{method:"GET"});
 
-  const data = response.json();
+    const data= response.json();
 
-  return data;
+    return data
+
+//   const response = await fetch("https://fakestoreapi.com/products")
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       // var userid = JSON.parse(data);
+//       var posts = data.posts;
+//       console.log(
+//         "posts = ",
+//         posts.map((item: any) => item.body)
+//       );
+//       return posts;
+//     });
+
+  //   const data = response.json()
+
+  //   return data
+
+//   return response;
+
+  //    return fetch("https://dummyjson.com/products?limit=10")
+  //       .then(function (response) {
+  //         return response.json();
+  //       })
+  //       .then(function (data) {
+  //         // var userid = JSON.parse(data);
+  //         var posts = data.products;
+  //         console.log(
+  //           "posts = ",
+  //           posts.map((item: any) => item.body)
+  //         );
+  //         return posts;
+  //       });
+
+  // const data = await response.json();
+  // const data=
+  // const issues = data.map((issue: { title: string,price:string }) => [issue] );
+
+  // const issues =Object.values(data)
+  // return issues;
+
+  // const response = await fetch("https://dummyjson.com/products")
+
+  // const data= response.json();
+
+  // var posts= data.then((products)=>products)
+
+  // return posts
 });
 
 interface IssuesState {
@@ -29,29 +68,25 @@ interface IssuesState {
   loading: boolean;
   error: string | null;
   data: string[];
-  category: [] | string[] | null;
 }
 const initialState: IssuesState = {
   issues: {},
   loading: false,
   error: null,
   data: [],
-  category: [],
 };
 
-const productSlice = createSlice({
+const golSlice = createSlice({
   name: "product",
-  initialState: {
-    loading: false,
-    error: null,
-    data: [""],
-    issues: {},
-    category: [""],
-  },
+  initialState,
   reducers: {
     searchProduct: (state, action: PayloadAction<string[]>) => {
-      console.log("state.data = ", state.data);
       console.log(action.payload);
+      // console.log("mamad = ",(state.data).map(item=>item))
+
+      // console.log("jafar = ", (state.data).filter((item:any)=>item.title.toLowerCase().includes(action.payload)))
+
+      // console.log("taghi = ", (state.data).map((item:any)=>item.title) )
 
       console.log(
         "taghi = ",
@@ -61,6 +96,8 @@ const productSlice = createSlice({
           )
           .map((x: any) => x.title)
       );
+
+      // action.payload="" ? state.data :
 
       state.issues = [
         ...state.data
@@ -70,6 +107,8 @@ const productSlice = createSlice({
           .map((x: any) => x),
       ];
 
+      // state.issues =state.data.filter((item:any)=> item.title.toLowerCase().includes(action.payload).map((x:any)=>x))
+
       console.log(
         "taghi = ",
         state.data
@@ -78,6 +117,12 @@ const productSlice = createSlice({
           )
           .map((x: any) => x.title)
       );
+
+      //  state.issues.flatMap(state.data.filter((item:any)=> item.title.toLowerCase().includes(action.payload).map((x:any)=>x)))
+
+      // state.issues.push((state.data).filter((item:any)=> item.title.toLowerCase().includes(action.payload)).map((x)=>x))
+
+      // console.log("issues = " , state.issues.map((b:any)=>[b.title,b.price,b.image]))
 
       console.log("issues = ", Object.values(state.issues));
 
@@ -107,47 +152,6 @@ const productSlice = createSlice({
       // Object.values(state.issues).length >1 ? state.issues : "not Found"
     },
 
-    categoryProduct: (state, action: PayloadAction<string[]>) => {
-      console.log(" CHECKED ===> ", action.payload[0]);
-      console.log(" ITEM === >", action.payload[1]);
-
-      // action.payload[0]
-      //   ? new Set(state.category).add(action.payload[1])
-      //   : new Set().delete(action.payload[1]);
-
-      action.payload[0]
-        ? state.category.push(action.payload[1])
-        : state.category=state.category.filter((x) => x !== action.payload[1]);
-
-
-        
-
-
-      console.log("CATEGory  ====>  ", Object.values(state.category));
-
-      state.issues=[...state.data.filter((item:any)=>state.category.includes(item.category))]
-
-
-      console.log("ISSUES ====>  ", state.issues)
-
-      // state.issues=state.category.length==0 ? state.data : state.data.filter((mi)=>state.category.includes(mi.category))
-
-      // state.issues =
-      //   state.category.size == 0
-      //     ? state.data
-      //     : Object(state.data).values.filter((h: any) =>
-      //         state.category.has(state.category)
-      //       );
-
-      // state.issues = [
-      //   ...state.data
-      //     .filter((item: any) =>
-      //       item.category.includes(action.payload)
-      //     )
-      //     .map((x: any) => x),
-      // ];
-    },
-
     // increment: (state) => state + 1,
     // decrement: (state) => state - 1,
     // multiply: {
@@ -166,15 +170,12 @@ const productSlice = createSlice({
         state.loading = false;
 
         state.data = Object.values(action.payload);
-
-        // state.data.unshift()
         //  state.data = JSON.parse(action.payload)
       }
     );
   },
 });
 
-export const { priceProduct, searchProduct, categoryProduct } =
-  productSlice.actions;
+export const { priceProduct, searchProduct } = golSlice.actions;
 
-export default productSlice.reducer;
+export default golSlice.reducer;
