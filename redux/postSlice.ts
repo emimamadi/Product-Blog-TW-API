@@ -13,47 +13,88 @@ import { posts } from "@/data/data";
 //   entities: [{}],
 //   loading: false,
 //   status:"idle"
+
 // };
 
+//
+
+// jsonplaceholder.typicode.com/posts
+
+///
+
+export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
+  fetch("https://dummyjson.com/posts?limit=10", {
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // var userid = JSON.parse(data);
+      var posts = data.posts;
+      console.log(
+        "posts = ",
+        posts.map((item: any) => item.body)
+      );
+      return posts;
+    });
+});
+
+console.log("POST =====> ", getPosts());
+
 // export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts").then(
-//     (data) => data.json()
-//   );
+//   const res = await fetch("https://dummyjson.com/posts").then(
+//     (x) => console.log(x)
+//   ).then((f)=>console.log(f))
+//   ;
 //   return res;
 // });
+
+// console.log("POST =====> ", getPosts.fulfilled);
 
 export const postSlice = createSlice({
   name: "Posts",
   initialState: {
-    data: posts,
+    data: [""],
     info: {},
     cat: [],
   },
   reducers: {
     searchPost: (state, action: PayloadAction<string[]>) => {
-      console.log("state.data = ", state.data);
-      console.log(action.payload);
+      // console.log("state.data = ", state.data);
 
-      state.info = [
-        ...state.data
-          .filter((item: any) =>
-            item.title.toLowerCase().includes(action.payload)
-          )
-          .map((x: any) => x),
-      ];
+      console.log("POSTS === > ", action.payload);
+
+      // state.info = [
+      //   ...state.data
+      //     .filter((item: any) =>
+      //       item.title.toLowerCase().includes(action.payload)
+      //     )
+      //     .map((x: any) => x),
+      // ];
     },
 
-    categoryPost: (state, action: PayloadAction<string[]>) => {
-      state.info = [
-        ...state.data
-          .filter((item: any) => item.category.includes(action.payload))
-          .map((x: any) => x),
-      ];
-    },
+    // categoryPost: (state, action: PayloadAction<string[]>) => {
+    //   state.info = [
+    //     ...state.data
+    //       .filter((item: any) => item.category.includes(action.payload))
+    //       .map((x: any) => x),
+    //   ];
+    // },
   },
 
+  extraReducers: (builder) => {
+    builder.addCase(
+      getPosts.fulfilled,
+      (state, action: PayloadAction<string[]>) => {
+        // state.loading = false;
+
+        state.data = Object.values(action.payload);
+      }
+    );
+  },
 });
 
-export const {  searchPost , categoryPost } = postSlice.actions;
+export const { searchPost } = postSlice.actions;
 
 export const postReducer = postSlice.reducer;

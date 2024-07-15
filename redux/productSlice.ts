@@ -62,12 +62,12 @@ const productSlice = createSlice({
           .map((x: any) => x.title)
       );
 
+      // state.data = [];
+
       state.issues = [
         ...state.data
-          .filter((item: any) =>
-            item.title.toLowerCase().includes(action.payload)
-          )
-          .map((x: any) => x),
+          .filter((item: any) => item.title.includes(action.payload))
+          // .map((x: any) => x),
       ];
 
       console.log(
@@ -92,14 +92,32 @@ const productSlice = createSlice({
     },
 
     priceProduct: (state, action: PayloadAction<number[]>) => {
-      console.log("action.payload 0 = ", action.payload[0]);
-      console.log("action.payload  1 = ", action.payload[1]);
+      console.log("action.payload 0 MIN  = ", action.payload[0]);
+      console.log("action.payload  1  MAX = ", action.payload[1]);
 
       state.issues = [
         ...state.data
           .filter(
             (item: any) =>
-              action.payload[0] < item.price && item.price < action.payload[1]
+              Number(item.price) < Number(action.payload[1]) &&
+              Number(action.payload[0]) < Number(item.price)
+          )
+          .map((x: any) => x),
+      ];
+
+      // Object.values(state.issues).length >1 ? state.issues : "not Found"
+    },
+
+    rateProduct: (state, action: PayloadAction<number[]>) => {
+      console.log("action.payload 0 MIN RATE = ", action.payload[0]);
+      console.log("action.payload  1  MAX RATE = ", action.payload[1]);
+
+      state.issues = [
+        ...state.data
+          .filter(
+            (item: any) =>
+              Number(item.rating.rate) < Number(action.payload[1]) &&
+              Number(action.payload[0]) < Number(item.rating.rate)
           )
           .map((x: any) => x),
       ];
@@ -117,18 +135,19 @@ const productSlice = createSlice({
 
       action.payload[0]
         ? state.category.push(action.payload[1])
-        : state.category=state.category.filter((x) => x !== action.payload[1]);
-
-
-        
-
+        : (state.category = state.category.filter(
+            (x) => x !== action.payload[1]
+          ));
 
       console.log("CATEGory  ====>  ", Object.values(state.category));
 
-      state.issues=[...state.data.filter((item:any)=>state.category.includes(item.category))]
+      state.issues = [
+        ...state.data.filter((item: any) =>
+          state.category.includes(item.category)
+        ),
+      ];
 
-
-      console.log("ISSUES ====>  ", state.issues)
+      console.log("ISSUES ====>  ", state.issues);
 
       // state.issues=state.category.length==0 ? state.data : state.data.filter((mi)=>state.category.includes(mi.category))
 
@@ -174,7 +193,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { priceProduct, searchProduct, categoryProduct } =
+export const { priceProduct, searchProduct, categoryProduct, rateProduct } =
   productSlice.actions;
 
 export default productSlice.reducer;

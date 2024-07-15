@@ -4,7 +4,7 @@ import React from "react";
 
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 
-import { searchPost, categoryPost } from "@/redux/postSlice";
+import { searchPost } from "@/redux/postSlice";
 export default function search() {
   const dispatch = useAppDispatch();
 
@@ -14,7 +14,7 @@ export default function search() {
         type="search"
         name="search"
         id=""
-        className="focus:outline-1 w-30 mx-auto rounded-full"
+        className="focus:outline-1 w-30 mx-2 py-1 rounded-full pl-5"
         placeholder="Search"
         // onChange={handleSearch}
         onChange={(e: any) => {
