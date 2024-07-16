@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 
@@ -8,18 +8,40 @@ import { searchPost } from "@/redux/postSlice";
 export default function search() {
   const dispatch = useAppDispatch();
 
+  const x=useRef(null)
+
+  const handleSearch=(e:any)=>{
+
+    e.preventDefault()
+    dispatch(searchPost(e.target.value))
+
+  }
+
+  useEffect(()=>{
+
+    (e:any)=>{
+
+      handleSearch(e.target.value)
+    }
+ 
+
+    // dispatch(searchPost(e.target.value))
+
+  },[])
+
   return (
     <ul className="flex flex-col gap-2 min-w-[350px] min-h-screen mt-5 rounded shadow-2xl border border-gray-200 pt-10">
       <input
+       ref={x}
         type="search"
         name="search"
         id=""
         className="focus:outline-1 w-30 mx-2 py-1 rounded-full pl-5"
         placeholder="Search"
-        // onChange={handleSearch}
-        onChange={(e: any) => {
-          dispatch(searchPost(e.target.value));
-        }}
+        onChange={handleSearch}
+        // onChange={(e: any) => {
+        //   dispatch(searchPost(e.target.value));
+        // }}
       />
 
       <li>

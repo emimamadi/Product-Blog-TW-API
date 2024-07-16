@@ -45,7 +45,7 @@ const productSlice = createSlice({
     loading: false,
     error: null,
     data: [""],
-    issues: {},
+    issues: [""],
     category: [""],
   },
   reducers: {
@@ -53,31 +53,42 @@ const productSlice = createSlice({
       console.log("state.data = ", state.data);
       console.log(action.payload);
 
-      console.log(
-        "taghi = ",
-        state.data
-          .filter((item: any) =>
-            item.title.toLowerCase().includes(action.payload)
-          )
-          .map((x: any) => x.title)
-      );
+      // console.log(
+      //   "taghi = ",
+      //   state.issues
+      //     .filter((item: any) =>
+      //       item.title.toLowerCase().includes(action.payload)
+      //     )
+      //     .map((x: any) => x.title)
+      // );
 
       // state.data = [];
 
-      state.issues = [
-        ...state.data
-          .filter((item: any) => item.title.includes(action.payload))
-          // .map((x: any) => x),
-      ];
+      // do {
 
-      console.log(
-        "taghi = ",
-        state.data
-          .filter((item: any) =>
-            item.title.toLowerCase().includes(action.payload)
-          )
-          .map((x: any) => x.title)
+      //   state.issues =
+      //     state.issues.filter((item: any) =>
+      //       item.title.includes(action.payload)
+      //     )
+
+      state.issues = state.data.filter((item: any) =>
+        item.title.includes(action.payload)
       );
+
+      // } while (action.payload.length <1);
+
+      // if (action.payload.length > 0) {
+
+      // }
+
+      // console.log(
+      //   "taghi = ",
+      //   state.data
+      //     .filter((item: any) =>
+      //       item.title.toLowerCase().includes(action.payload)
+      //     )
+      //     .map((x: any) => x.title)
+      // );
 
       console.log("issues = ", Object.values(state.issues));
 
@@ -95,15 +106,13 @@ const productSlice = createSlice({
       console.log("action.payload 0 MIN  = ", action.payload[0]);
       console.log("action.payload  1  MAX = ", action.payload[1]);
 
-      state.issues = [
-        ...state.data
-          .filter(
-            (item: any) =>
-              Number(item.price) < Number(action.payload[1]) &&
-              Number(action.payload[0]) < Number(item.price)
-          )
-          .map((x: any) => x),
-      ];
+      state.issues = state.data
+        .filter(
+          (item: any) =>
+            Number(item.price) < Number(action.payload[1]) &&
+            Number(action.payload[0]) < Number(item.price)
+        )
+        .map((x: any) => x);
 
       // Object.values(state.issues).length >1 ? state.issues : "not Found"
     },
@@ -112,15 +121,15 @@ const productSlice = createSlice({
       console.log("action.payload 0 MIN RATE = ", action.payload[0]);
       console.log("action.payload  1  MAX RATE = ", action.payload[1]);
 
-      state.issues = [
-        ...state.data
+      state.issues = 
+        state.data
           .filter(
             (item: any) =>
               Number(item.rating.rate) < Number(action.payload[1]) &&
               Number(action.payload[0]) < Number(item.rating.rate)
           )
-          .map((x: any) => x),
-      ];
+          .map((x: any) => x)
+      
 
       // Object.values(state.issues).length >1 ? state.issues : "not Found"
     },
@@ -184,6 +193,7 @@ const productSlice = createSlice({
       (state, action: PayloadAction<string[]>) => {
         state.loading = false;
 
+        state.issues = Object.values(action.payload);
         state.data = Object.values(action.payload);
 
         // state.data.unshift()

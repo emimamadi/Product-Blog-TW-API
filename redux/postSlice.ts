@@ -23,24 +23,28 @@ import { posts } from "@/data/data";
 ///
 
 export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
-  fetch("https://dummyjson.com/posts?limit=10", {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10", {
     method: "GET",
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      // var userid = JSON.parse(data);
-      var posts = data.posts;
-      console.log(
-        "posts = ",
-        posts.map((item: any) => item.body)
-      );
-      return posts;
-    });
+  });
+
+  const data = response.json();
+
+  return data;
+
+  // .then(function (response) {
+  //   return response.json();
+  // })
+  // .then(function (data) {
+  //   // var userid = JSON.parse(data);
+  //   var posts = data.posts;
+  //   console.log(
+  //     "posts = ",
+  //     posts.map((item: any) => item.body)
+  //   );
+  //   return posts;
 });
 
-console.log("POST =====> ", getPosts());
+// console.log("POST =====> ", getPosts());
 
 // export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
 //   const res = await fetch("https://dummyjson.com/posts").then(
@@ -56,12 +60,12 @@ export const postSlice = createSlice({
   name: "Posts",
   initialState: {
     data: [""],
-    info: {},
+    info: [""],
     cat: [],
   },
   reducers: {
     searchPost: (state, action: PayloadAction<string[]>) => {
-      // console.log("state.data = ", state.data);
+      console.log("state.data = ==>  ", state.data);
 
       console.log("POSTS === > ", action.payload);
 
