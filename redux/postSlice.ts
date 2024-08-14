@@ -23,7 +23,7 @@ import { posts } from "@/data/data";
 ///
 
 export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=10", {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=9", {
     method: "GET",
   });
 

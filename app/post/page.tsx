@@ -93,7 +93,7 @@ export default function Page() {
     <div className="flex gap-5 mx-10">
       <Search />
       {Object.values(data).length > 1 ? (
-        <div className="grid grid-cols-3 gap-5 my-5 mx-auto w-3/4 rounded-2xl">
+        <div className="xl:grid xl:grid-cols-3 md:grid md:grid-cols-2 gap-4 my-5 mx-2 w-full min-h-screen rounded-2xl">
           {Object.values(info).length > 1
             ? Object.values(info).map((PostItem: any) => (
                 <div

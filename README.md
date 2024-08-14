@@ -9,11 +9,15 @@ npm i flowbite-react
 
 Config tailwind.config.ts with flowbite setting
 
+
 npm i sass
+
+npm install @reduxjs/toolkit react-redux
 
 npm i react-slider
 
 npm i type /  react slider 
+
 
 
 
