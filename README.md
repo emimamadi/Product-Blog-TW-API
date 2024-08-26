@@ -3,6 +3,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Precondition
 
+```bash
+
 npm install 
 
 npm i flowbite-react 
@@ -18,6 +20,7 @@ npm i react-slider
 
 npm i type /  react slider 
 
+```
 
 
 

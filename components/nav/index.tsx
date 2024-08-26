@@ -5,26 +5,41 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useAppSelector } from "@/redux/store";
 import Link from "next/link";
 
+import _ from "lodash";
+
 export default function index() {
   var QTY = [];
 
-  var az=[]
+  var az = [];
 
   var cart = useAppSelector((state) => state.Cart.cart);
 
-  const item = Object.values(cart).flatMap((mk: any) => mk);
-  for (let mo = 1; mo < Object.values(item).length; mo++) {
-    // QTY += Object.values(item)[mo]["qty"];
-    QTY.push(Object.values(item)[mo]["qty"])
+  const zx = _.cloneDeep(cart);
 
-    az.push({id:Object.values(item)[mo]["id"],"title":Object.values(item)[mo]["title"],"price":Object.values(item)[mo]["price"]})
-  }
-  let q=QTY.reduce(getSum,0)
-
-  function getSum(total:any, num:any) {
-    return total + Math.round(num);
+  for (let i = 1; i <= zx.length; i++) {
+    az.push({
+      ID: zx[i]?.Title.id,
+      Title: zx[i]?.Title.title,
+      QTY: zx[i]?.qty,
+    });
+    QTY.push(zx[i]?.qty);
   }
 
+  QTY.pop();
+
+  var sum = QTY.reduce((accumulator: number, currentValue: number) => {
+    return accumulator + currentValue;
+  }, 0);
+
+  // let X=QTY.reduce(function(acc, val) { return acc + val; }, 0)
+
+  console.log("QTY == ", QTY);
+
+  console.log("QTY X == ", sum);
+
+  az.pop();
+
+  console.log("AZ == ", az);
 
   const [isClient, setIsClient] = useState(false);
 
@@ -32,37 +47,11 @@ export default function index() {
     setIsClient(true);
   }, []);
 
-
-  // const GetItems=(items:any)=>{
-
-  //   // const cart = useAppSelector((state) => state.Cart.cart);
-
-   
-  //   //  {
-  //   //   QTY += Object.values(item)[mo]["qty"];
-  //   // }
-  //   let x = [];
-
-  //   var item = Object.values(cart).flatMap((mk: any) => mk);
-  //   for (let mo = 1; mo < Object.values(item).length; mo++) {
-  //     var item = Object.values(item)[mo]["title"];
-
-      
-  //     x.push(<Dropdown.Item>{item}</Dropdown.Item>);
-  //   }
-  //   return x;
-  // };
-
-  // return <ul>{GetItems(items)}</ul>;
-
-  // const cart = useAppSelector((state) => state.Cart.cart);
-
-  console.log("QTY ====================================> ", QTY);
-
-  console.log("QTY ====================================> ", q);
-
   return (
-    <Navbar rounded className="shadow-md shadow-gray-100 sticky top-0 mx-5 mt-5 z-10 ">
+    <Navbar
+      rounded
+      className="shadow-md shadow-gray-100 sticky top-0 mx-5 mt-5 z-10 "
+    >
       <Navbar.Brand href="https://flowbite-react.com">
         <img
           src="/favicon.ico"
@@ -70,14 +59,19 @@ export default function index() {
           alt="Flowbite React Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
+          Siavash Shop
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2 relative">
         {isClient && (
-          <div className="text-white bg-red-600 w-[50%] h-[50%] rounded-full  text-center absolute left-8 z-10">
-            {q}{" "}
-          </div>
+          <>
+            {sum > 0 ? (
+              <div className="text-white bg-red-600 w-[50%] h-[50%] rounded-full  text-center absolute left-8 z-10">
+                {" "}
+                {sum}{" "}
+              </div>
+            ) : null}{" "}
+          </>
         )}
         <Dropdown
           arrowIcon={false}
@@ -97,56 +91,19 @@ export default function index() {
             </span>
           </Dropdown.Header>
 
+          {az.map((zo: any) => (
+            <Dropdown.Item key={zo.ID} className="bg-slate-400">
+              {zo.Title} || {zo.QTY}
+            </Dropdown.Item>
+          ))}
+          <Link
+            href="/product/Checkout"
+            className="btn bg-yellow-300 flex justify-center my-1 rounded-xl"
+          >
+            Check out
+          </Link>
+          <Dropdown.Divider />
 
-
- {
-
-  
-//   for (var mo = 1; mo < Object.values(item:any).length; mo++) {
-
-//     <Dropdown.Item> {Object.values(item)[mo]["title"] }|| {Object.values(item)[mo]["qty"]} </Dropdown.Item>
-  
- 
-  
-
-  
-
-// } 
-
-}
-
-
-
-     
-
-    {/* item = Object.values(cart).flatMap((mk: any) => mk);
-     for (let mo = 1; mo < Object.values(item).length; mo++) {
-       QTY += Object.values(item)[mo]["qty"];
-     } */}
-
-
-    
-
-
-  
-
-{
-
-  // Object.values((item:any)=>
-  
-  //   <Dropdown.Item>{item[2]["title"]}</Dropdown.Item>)
-}
-
-
-{
-  az.map((zo:any)=>(
-<Dropdown.Item key={zo.id} className="bg-slate-400">{zo.title} , ${zo .price}</Dropdown.Item>
-  ))
-}
-<Link href="/product/Checkout" className="btn bg-yellow-300 flex justify-center my-1 rounded-xl">Check out</Link>
-<Dropdown.Divider />
-
-     
           <Dropdown.Item>Dashboard</Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Item>Earnings</Dropdown.Item>
