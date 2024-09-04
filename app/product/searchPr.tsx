@@ -110,21 +110,6 @@ export default function SearchFilter() {
                 </g>
               </svg>
 
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg> */}
-
               <span>Category</span>
             </span>
             <svg
@@ -167,38 +152,6 @@ export default function SearchFilter() {
                   </label>
                 </li>
               ))}
-
-              {/* <li>
-                <input
-                  id="electronic-checkbox"
-                  type="checkbox"
-                  value=""
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  htmlFor="electronic-checkbox"
-                  className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Electronic
-                </label>
-              </li>
-              <li>
-                <input
-                  id="smartphone-checkbox"
-                  type="checkbox"
-                  value=""
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                />
-                <label
-                  htmlFor="smartphone-checkbox"
-                  className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  smartphone
-                </label>
-              </li> */}
-              {/* <li>
-                <a href="">Document title</a>
-              </li> */}
             </ul>
           </article>
         </details>

@@ -26,11 +26,11 @@ export default function page() {
 
     az.push({
       number: mo,
-      id: Object.values(item)[mo]["id"],
-      title: Object.values(item)[mo]["title"],
-      price: Object.values(item)[mo]["price"],
-      brand: Object.values(item)[mo]["brand"],
-      category: Object.values(item)[mo]["category"],
+      id: Object.values(item)[mo]["Title"]["id"],
+      title: Object.values(item)[mo]["Title"]["title"],
+      price: Object.values(item)[mo]["Title"]["price"],
+      brand: Object.values(item)[mo]["Title"]["brand"],
+      category: Object.values(item)[mo]["Title"]["category"],
       qty: Object.values(item)[mo]["qty"],
     });
   }
@@ -40,6 +40,8 @@ export default function page() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  console.log("   AZ  = ",item)
 
   return (
     // <>Hello</>

@@ -58,16 +58,7 @@ const productSlice = createSlice({
         item.title.includes(action.payload)
       );
 
-      console.log("issues = ", Object.values(state.issues));
-
       const items = Object.values(state.issues);
-
-      console.log(
-        "item = ",
-        items.map((item: any) => item.title)
-      );
-
-      console.log("Asghar = ", 1);
     },
 
     priceProduct: (state, action: PayloadAction<number[]>) => {

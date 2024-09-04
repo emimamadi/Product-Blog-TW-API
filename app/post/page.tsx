@@ -21,33 +21,6 @@ type A = {
   body: string;
 };
 
-// export async function GetServerSideProps() {
-//   const userData = await fetch('https://jsonplaceholder.typicode.com/users/1/posts/')
-//   const userJSON = await userData.json()
-
-//   return {
-//     props: {
-//       posts: userJSON
-//     }
-//   }
-// }
-
-// async function getData() {
-//   // "use server";
-
-//   // const res = await fetch(`https://dummyjson.com/posts/`).then(res => res.json())
-//   // .then(console.log);
-
-//   const res = await fetch(
-//     "https://dummyjson.com/posts?limit=10"
-//   );
-//   const data= await res.json();
-
-//   const {posts}=data
-
-//   console.log(posts)
-// }
-
 export default function Page() {
   const dispatch = useAppDispatch();
 
@@ -62,35 +35,8 @@ export default function Page() {
     dispatch(getPosts());
   });
 
-  // useEffect(()=>{
-  //   data
-  // }
-  // ,[data,info])
-
-  // const data=posts
-
-  //     const res = await fetch(`https://dummyjson.com/posts/`).then(res => res.json())
-  //   .then(console.log);
-
-  // let data=res["posts"]
-
-  // let postArray: [] = await getData()
-
-  // fetch("https://dummyjson.com/products")
-  // .then((res) => res.json())
-  // .then((json) => console.log(json));
-  //   let data = async () => {
-  //     const res = await fetch(`https://dummyjson.com/products/1`);
-  //     const x= await res.json();
-
-  //     return x
-
-  //   };
-
-  // console.log(postArray);
-
   return (
-    <div className="flex gap-5 mx-10">
+    <div className="flex  mx-10">
       <Search />
       {Object.values(data).length > 1 ? (
         <div className="xl:grid xl:grid-cols-3 md:grid md:grid-cols-2 gap-4 my-5 mx-2 w-full min-h-screen rounded-2xl">
@@ -110,15 +56,14 @@ export default function Page() {
                   <div className="px-5 pb-5">
                     <Link href={`/post/${PostItem.id}`}>
                       <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
-                        {truncateString(PostItem.title, 23) || PostItem.title }... 
-                       
+                        {truncateString(PostItem.title, 23) || PostItem.title}
+                        ...
                       </h5>
                     </Link>
 
                     <div className="flex flex-col items-center justify-between">
                       <span className="text-xl font-bold text-gray-900 dark:text-white my-2 text-center ">
-                        {truncateString(PostItem.body, 30) || PostItem.body}... 
-                        
+                        {truncateString(PostItem.body, 30) || PostItem.body}...
                       </span>
                     </div>
                   </div>
@@ -139,15 +84,14 @@ export default function Page() {
                   <div className="px-5 pb-5">
                     <Link href={`/post/${PostItem.id}`}>
                       <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
-                        {truncateString(PostItem.title, 23) || PostItem.title }... 
-                       
+                        {truncateString(PostItem.title, 23) || PostItem.title}
+                        ...
                       </h5>
                     </Link>
 
                     <div className="flex flex-col items-center justify-between">
                       <span className="text-xl font-bold text-gray-900 dark:text-white my-2 text-center">
-                        {truncateString(PostItem.body, 30) || PostItem.body}... {" "}
-                      
+                        {truncateString(PostItem.body, 30) || PostItem.body}...{" "}
                       </span>
                     </div>
                   </div>

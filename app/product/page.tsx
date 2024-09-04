@@ -1,5 +1,7 @@
 "use client";
 
+import { createSelector } from '@reduxjs/toolkit'
+
 import dynamic from "next/dynamic";
 
 import React, { useEffect, useState } from "react";
@@ -36,7 +38,7 @@ export default function page() {
 
   // const [products, setProducts] = useState([]);
 
-  const data = useAppSelector((state) => state.Product.data);
+  const data =useAppSelector((state) => state.Product.data);
 
   const issues = useAppSelector((state) => state.Product.issues);
 

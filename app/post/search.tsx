@@ -30,7 +30,7 @@ export default function search() {
   },[])
 
   return (
-    <ul className="flex flex-col gap-2 min-w-[350px] min-h-screen mt-5 rounded shadow-2xl border border-gray-200 pt-10">
+    <ul className="flex flex-col gap-2 min-w-[300px] min-h-screen mt-5 rounded shadow-2xl border border-gray-200 pt-10">
       <input
        ref={x}
         type="search"
@@ -44,14 +44,17 @@ export default function search() {
         // }}
       />
 
+ 
+ 
+
       <li>
         <details className="group">
           <summary className="flex items-center justify-between gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
-            <span className="flex gap-2">
+            {/* <span className="flex gap-2">
               <img className="w-6 h-6 rounded-lg" src="/favicon.ico" alt="" />
 
               <span>Filters</span>
-            </span>
+            </span> */}
             {/* <svg
               className="w-5 h-5 text-gray-500 transition group-open:rotate-90"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +88,7 @@ export default function search() {
                   ></path>
                 </svg> */}
 
-                <a href="http://127.0.0.1:8000/user/dashboard">Dashboard</a>
+                {/* <a href="http://127.0.0.1:8000/user/dashboard">Dashboard</a> */}
               </li>
 
               <li className="flex gap-2">
@@ -104,7 +107,7 @@ export default function search() {
                   ></path>
                 </svg> */}
 
-                <a href="http://127.0.0.1:8000/user/study-lists">Study Lists</a>
+                {/* <a href="http://127.0.0.1:8000/user/study-lists">Study Lists</a> */}
               </li>
 
               <li className="flex gap-2">
@@ -123,9 +126,9 @@ export default function search() {
                   ></path>
                 </svg> */}
 
-                <a href="http://127.0.0.1:8000/user/contribution">
+                {/* <a href="http://127.0.0.1:8000/user/contribution">
                   Your contribution
-                </a>
+                </a> */}
               </li>
 
               <li className="flex gap-2">
@@ -149,7 +152,7 @@ export default function search() {
                   ></path>
                 </svg> */}
 
-                <a href="http://127.0.0.1:8000/user/settings">Settings</a>
+                {/* <a href="http://127.0.0.1:8000/user/settings">Settings</a> */}
               </li>
 
               {/* <form action="http://127.0.0.1:8000/auth/logout" method="POST">
@@ -189,7 +192,7 @@ export default function search() {
                 ></path>
               </svg> */}
 
-              <span>Recent Documents</span>
+              {/* <span>Recent Documents</span> */}
             </span>
             {/* <svg
               className="w-5 h-5 text-gray-500 transition group-open:rotate-90"
@@ -207,7 +210,7 @@ export default function search() {
           </summary>
 
           <article className="px-4 pb-4">
-            <ul className="flex flex-col gap-1 pl-2">
+            {/* <ul className="flex flex-col gap-1 pl-2">
               <li>
                 <a href="">Document title</a>
               </li>
@@ -217,7 +220,7 @@ export default function search() {
               <li>
                 <a href="">Document title</a>
               </li>
-            </ul>
+            </ul> */}
           </article>
         </details>
       </li>
@@ -240,7 +243,7 @@ export default function search() {
                   d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
                 />
               </svg> */}
-              <span>Popular courses</span>
+              {/* <span>Popular courses</span> */}
             </span>
             {/* <svg
               className="w-5 h-5 text-gray-500 transition group-open:rotate-90"
@@ -258,7 +261,7 @@ export default function search() {
           </summary>
 
           <article className="px-4 pb-4">
-            <ul className="flex flex-col gap-1 pl-2">
+            {/* <ul className="flex flex-col gap-1 pl-2">
               <li>
                 <a href="">Course title</a>
               </li>
@@ -268,10 +271,12 @@ export default function search() {
               <li>
                 <a href="">Course title</a>
               </li>
-            </ul>
+            </ul> */}
           </article>
         </details>
       </li>
+
+
     </ul>
   );
 }
