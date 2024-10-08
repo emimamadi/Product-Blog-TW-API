@@ -53,7 +53,7 @@ export default function page() {
         Back
       </Link>
       {isClient && (
-        <div className="mx-5">
+        <div className="mx-5 min-h-screen">
           <Table>
             <Table.Head>
               <Table.HeadCell>Product name</Table.HeadCell>
