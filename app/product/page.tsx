@@ -81,7 +81,7 @@ export default function page() {
   }
 
   return (
-    <div className="flex mx-5">
+    <div className="flex-col sm:flex sm:flex-row mx-5">
       <SearchFilter />
 
       {/* <Sidebar /> */}

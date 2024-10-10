@@ -33,15 +33,22 @@ export default function Page() {
 
   useEffect(() => {
     dispatch(getPosts());
-  });
+  },[]);
+
+
+  console.log("data ==== > ", data)
+
+  console.log("info ==== > ", info)
+  
 
   return (
-    <div className="flex  mx-10">
+    <div className="flex-col sm:flex sm:flex-row mx-10">
       <Search />
       {Object.values(data).length > 1 ? (
         <div className="xl:grid xl:grid-cols-3 md:grid md:grid-cols-2 gap-4 my-5 mx-2 w-full min-h-screen rounded-2xl">
-          {Object.values(info).length > 1
-            ? Object.values(info).map((PostItem: any) => (
+          {(() => {
+            if (Object.values(info).length > 0) {
+              return Object.values(info).map((PostItem: any) => (
                 <div
                   className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700"
                   key={PostItem.id}
@@ -55,48 +62,31 @@ export default function Page() {
                   </Link>
                   <div className="px-5 pb-5">
                     <Link href={`/post/${PostItem.id}`}>
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
-                        {truncateString(PostItem.title, 23) || PostItem.title}
+                      <h5 className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white text-center">
+                        {truncateString(PostItem.title,25) || PostItem.title}
                         ...
                       </h5>
                     </Link>
 
                     <div className="flex flex-col items-center justify-between">
-                      <span className="text-xl font-bold text-gray-900 dark:text-white my-2 text-center ">
+                      <span className="text-xl font-normal text-gray-900 dark:text-white my-2 text-center ">
                         {truncateString(PostItem.body, 30) || PostItem.body}...
                       </span>
                     </div>
                   </div>
                 </div>
-              ))
-            : Object.values(data).map((PostItem: any) => (
+              ));
+            } else {
+              return (
                 <div
-                  className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700"
-                  key={PostItem.id}
+                  className="flex justify-center items-center min-h-screen w-full"
+                  style={{ width: "70vw" }}
                 >
-                  <Link href={`/post/${PostItem.id}`}>
-                    <img
-                      className="p-8 rounded-t-lg w-60 h-60 mx-auto"
-                      src="./favicon.ico"
-                      alt="product image"
-                    />
-                  </Link>
-                  <div className="px-5 pb-5">
-                    <Link href={`/post/${PostItem.id}`}>
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white text-center">
-                        {truncateString(PostItem.title, 23) || PostItem.title}
-                        ...
-                      </h5>
-                    </Link>
-
-                    <div className="flex flex-col items-center justify-between">
-                      <span className="text-xl font-bold text-gray-900 dark:text-white my-2 text-center">
-                        {truncateString(PostItem.body, 30) || PostItem.body}...{" "}
-                      </span>
-                    </div>
-                  </div>
+                  <p className="w-50 h-20">Not Found...</p>
                 </div>
-              ))}
+              );
+            }
+          })()}
         </div>
       ) : (
         <div className="w-full min-h-screen flex justify-center items-center">

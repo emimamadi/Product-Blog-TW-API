@@ -13,7 +13,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Carousel />
 
-      <div className=" flex gap-5 mx-5">
+      <div className="flex-col sm:flex sm:flex-row gap-5 mx-5">
         <Accordian />
         <Accordian />
       </div>

@@ -23,9 +23,12 @@ import { posts } from "@/data/data";
 ///
 
 export const getPosts = createAsyncThunk("posts/getPosts", async (thunkAPI) => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=9", {
-    method: "GET",
-  });
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/posts?_limit=9",
+    {
+      method: "GET",
+    }
+  );
 
   const data = response.json();
 
@@ -65,17 +68,13 @@ export const postSlice = createSlice({
   },
   reducers: {
     searchPost: (state, action: PayloadAction<string[]>) => {
-      console.log("state.data = ==>  ", state.data);
+      console.log("state.data1212 = ==>  ", state.data);
 
       console.log("POSTS === > ", action.payload);
 
-      // state.info = [
-      //   ...state.data
-      //     .filter((item: any) =>
-      //       item.title.toLowerCase().includes(action.payload)
-      //     )
-      //     .map((x: any) => x),
-      // ];
+      state.info = state.data.filter((item: any) =>
+        item.title.includes(action.payload)
+      );
     },
 
     // categoryPost: (state, action: PayloadAction<string[]>) => {
@@ -94,6 +93,7 @@ export const postSlice = createSlice({
         // state.loading = false;
 
         state.data = Object.values(action.payload);
+        state.info = Object.values(action.payload);
       }
     );
   },

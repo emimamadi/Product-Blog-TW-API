@@ -4,7 +4,7 @@ import { Accordion } from "flowbite-react";
 
 export default function accord() {
   return (
-    <Accordion className="w-1/2 h-1/2">
+    <Accordion className="w-full h-auto md:w-1/2 md:h-1/2">
       <Accordion.Panel>
         <Accordion.Title>What is Flowbite?</Accordion.Title>
         <Accordion.Content>

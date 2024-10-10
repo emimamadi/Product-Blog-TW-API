@@ -7,6 +7,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
+
 // import { products } from "@/data/data"
 
 //----------------------------------------------------
@@ -54,8 +55,13 @@ const productSlice = createSlice({
       console.log("state.data  = ", state.data);
       console.log(action.payload);
 
+      // const x=action.payload.toString().toLowerCase()
+
+      // console.log("x == > ",x)
+      
+
       state.issues = state.data.filter((item: any) =>
-        item.title.includes(action.payload)
+        item.title.toLowerCase().includes(action.payload)
       );
 
       const items = Object.values(state.issues);
